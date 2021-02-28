@@ -1,0 +1,94 @@
+span.green{
+	color: #34fc47;
+}
+
+html,
+body {
+  height: 100%;
+  width: 100%;
+  overflow: hidden;
+  background-image: url('https://sourcedigit.com/wp-content/uploads/2020/03/Focal-Fossa_1.png');
+}
+
+body{
+  max-width: 100vw;
+  margin: 0;
+}
+
+.terminal {
+  width: 50%;
+  height: 50%;
+  position: fixed;
+  top: 20%;
+  left: 30%;
+  display: flex;
+  flex-direction: column;
+}
+
+.terminal-header {
+  background-color: #3e3e3e;
+  height: 35px;
+  border-radius: 7px 7px 0 0;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  padding: 0 15px;
+}
+
+.terminal-header > span {
+  color: #8e9a9b;
+  width: 80%;
+  text-align: center;
+  margin: auto;
+}
+
+.terminal-header > button {
+  color: #9b9b9b;
+  background: none;
+  border: none;
+}
+
+.terminal-body {
+  background-color: #380c2a;
+  height: stretch;
+  border-radius: 0 0 7px 7px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-end;
+  padding: 15px;
+  flex-grow: 1;
+  flex: 1;
+}
+
+.terminal-line > span.line-head {
+  color: #00de33;
+  text-align: left;
+  font-weight: bold;
+}
+
+.terminal-line > span.line-content {
+  color: #fff;
+  text-align: left;
+  padding: 0 5px;
+}
+
+.program-line > span {
+  color: #00de33;
+  font-weight: bold;
+}
+.program-line__links{
+  margin: 15px 0 0 15px;
+}
+.program-line__links > a {
+  color: #00de33;
+  font-weight: bold;
+  text-decoration: none;
+}
+
+.program-line__links > a:hover {
+  text-decoration: underline;
+}
+
+.program-line__links > a + a{
+  margin-left: 25px;
+}
