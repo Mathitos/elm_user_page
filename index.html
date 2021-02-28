@@ -4736,10 +4736,8 @@
 				};
 				var $author$project$Intro$intro = '\nStarting Introduction script...\n.\n.\n.\nHello, my name is Matheus Anzzulin and I am a Brazilian dev, passionate about functional programming. In my free time, I like to help organize meetups around my area and do some side projects, usually involving tabletop games.\nIf you want to know more about me or my work here are some useful links:\n\n ';
 				var $author$project$Intro$introLength = $elm$core$String$length($author$project$Intro$intro);
-				var $elm$core$Debug$log = _Debug_log;
 				var $elm$core$Process$sleep = _Process_sleep;
 				var $author$project$Intro$writeMore = function (currentLength) {
-					var dummy = A2($elm$core$Debug$log, 'writeMore', currentLength);
 					return (_Utils_cmp($author$project$Intro$introLength, currentLength) > 0) ? A2(
 						$elm$core$Task$perform,
 						function (_v0) {
@@ -4860,7 +4858,6 @@
 				var $author$project$Intro$Finished = { $: 'Finished' };
 				var $author$project$Intro$update = F2(
 					function (msg, _v0) {
-						var dummy = A2($elm$core$Debug$log, 'update', msg);
 						if (msg.$ === 'Writing') {
 							var length = msg.a;
 							return _Utils_Tuple2(
@@ -5043,43 +5040,45 @@
 						$author$project$Intro$contentView(model));
 				};
 				var $elm$html$Html$button = _VirtualDom_node('button');
-				var $author$project$Intro$terminalHeader = A2(
-					$elm$html$Html$div,
-					_List_fromArray(
-						[
-							$elm$html$Html$Attributes$class('terminal-header')
-						]),
-					_List_fromArray(
-						[
-							A2(
-								$elm$html$Html$span,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('intro.sh')
-									])),
-							A2(
-								$elm$html$Html$button,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('-')
-									])),
-							A2(
-								$elm$html$Html$button,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('□')
-									])),
-							A2(
-								$elm$html$Html$button,
-								_List_Nil,
-								_List_fromArray(
-									[
-										$elm$html$Html$text('x')
-									]))
-						]));
+				var $author$project$WindowHeader$windowHeader = function (title) {
+					return A2(
+						$elm$html$Html$div,
+						_List_fromArray(
+							[
+								$elm$html$Html$Attributes$class('window-header')
+							]),
+						_List_fromArray(
+							[
+								A2(
+									$elm$html$Html$span,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text(title)
+										])),
+								A2(
+									$elm$html$Html$button,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('-')
+										])),
+								A2(
+									$elm$html$Html$button,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('□')
+										])),
+								A2(
+									$elm$html$Html$button,
+									_List_Nil,
+									_List_fromArray(
+										[
+											$elm$html$Html$text('x')
+										]))
+							]));
+				};
 				var $author$project$Intro$view = function (model) {
 					return A2(
 						$elm$html$Html$div,
@@ -5089,7 +5088,7 @@
 							]),
 						_List_fromArray(
 							[
-								$author$project$Intro$terminalHeader,
+								$author$project$WindowHeader$windowHeader('intro.sh'),
 								$author$project$Intro$terminalBody(model)
 							]));
 				};
@@ -5100,6 +5099,30 @@
 						$author$project$Main$IntroMsg,
 						$author$project$Intro$view(introModel));
 				};
+				var $elm$html$Html$img = _VirtualDom_node('img');
+				var $elm$html$Html$Attributes$src = function (url) {
+					return A2(
+						$elm$html$Html$Attributes$stringProperty,
+						'src',
+						_VirtualDom_noJavaScriptOrHtmlUri(url));
+				};
+				var $author$project$ProfilePicture$view = A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('profile-picture')
+						]),
+					_List_fromArray(
+						[
+							$author$project$WindowHeader$windowHeader('profile-photo.jpg'),
+							A2(
+								$elm$html$Html$img,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$src('https://avatars.githubusercontent.com/u/12518699?s=460&u=48e548b6beeb19e010cfb1ed3635dca26d55a0a4&v=4')
+									]),
+								_List_Nil)
+						]));
 				var $author$project$Main$view = function (model) {
 					return A2(
 						$elm$html$Html$div,
@@ -5109,7 +5132,8 @@
 							]),
 						_List_fromArray(
 							[
-								$author$project$Main$introView(model)
+								$author$project$Main$introView(model),
+								$author$project$ProfilePicture$view
 							]));
 				};
 				var $author$project$Main$main = $elm$browser$Browser$element(

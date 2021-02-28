@@ -5,6 +5,7 @@ import Html exposing (..)
 import Html.Attributes exposing (class)
 import Html.Events exposing (..)
 import Intro
+import ProfilePicture
 
 
 
@@ -108,7 +109,7 @@ openWindow window model =
 view : Model -> Html Msg
 view model =
     div [ class "desktop" ]
-        [ introView model ]
+        [ introView model, ProfilePicture.view ]
 
 
 introView : Model -> Html Msg

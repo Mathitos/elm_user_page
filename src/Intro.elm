@@ -1,9 +1,10 @@
 module Intro exposing (Model, Msg, init, update, view)
 
 import Html exposing (..)
-import Html.Attributes exposing (class, href, style)
+import Html.Attributes exposing (class, href)
 import Process
 import Task
+import WindowHeader exposing (windowHeader)
 
 
 
@@ -53,10 +54,6 @@ init =
 
 update : Msg -> Model -> ( Model, Cmd Msg )
 update msg _ =
-    let
-        dummy =
-            Debug.log "update" msg
-    in
     case msg of
         Writing length ->
             ( Partial length, writeMore length )
@@ -67,10 +64,6 @@ update msg _ =
 
 writeMore : Int -> Cmd Msg
 writeMore currentLength =
-    let
-        dummy =
-            Debug.log "writeMore" currentLength
-    in
     if introLength > currentLength then
         Process.sleep 10 |> Task.perform (\_ -> Writing (currentLength + 1))
 
@@ -85,18 +78,8 @@ writeMore currentLength =
 view : Model -> Html Msg
 view model =
     div [ class "terminal" ]
-        [ terminalHeader
+        [ windowHeader "intro.sh"
         , terminalBody model
-        ]
-
-
-terminalHeader : Html Msg
-terminalHeader =
-    div [ class "terminal-header" ]
-        [ span [] [ text "intro.sh" ]
-        , button [] [ text "-" ]
-        , button [] [ text "□" ]
-        , button [] [ text "x" ]
         ]
 
 
