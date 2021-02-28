@@ -4738,17 +4738,22 @@
 				var $author$project$Intro$introLength = $elm$core$String$length($author$project$Intro$intro);
 				var $elm$core$Process$sleep = _Process_sleep;
 				var $author$project$Intro$writeMore = function (currentLength) {
-					return (_Utils_cmp($author$project$Intro$introLength, currentLength) > 0) ? A2(
+					return (_Utils_cmp($author$project$Intro$introLength, currentLength) < 1) ? A2(
 						$elm$core$Task$perform,
 						function (_v0) {
-							return $author$project$Intro$Writing(currentLength + 1);
+							return $author$project$Intro$Done;
 						},
-						$elm$core$Process$sleep(10)) : A2(
+						$elm$core$Process$sleep(1)) : (((currentLength < 31) || (currentLength > 38)) ? A2(
 							$elm$core$Task$perform,
 							function (_v1) {
-								return $author$project$Intro$Done;
+								return $author$project$Intro$Writing(currentLength + 1);
 							},
-							$elm$core$Process$sleep(1));
+							$elm$core$Process$sleep(30)) : A2(
+								$elm$core$Task$perform,
+								function (_v2) {
+									return $author$project$Intro$Writing(currentLength + 1);
+								},
+								$elm$core$Process$sleep(500)));
 				};
 				var $author$project$Intro$init = _Utils_Tuple2(
 					$author$project$Intro$Partial(0),
@@ -4909,6 +4914,39 @@
 				var $elm$html$Html$div = _VirtualDom_node('div');
 				var $elm$virtual_dom$VirtualDom$map = _VirtualDom_map;
 				var $elm$html$Html$map = $elm$virtual_dom$VirtualDom$map;
+				var $elm$html$Html$input = _VirtualDom_node('input');
+				var $elm$html$Html$span = _VirtualDom_node('span');
+				var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
+				var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
+				var $author$project$Intro$endScriptView = A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('terminal-line')
+						]),
+					_List_fromArray(
+						[
+							A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('line-head')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('>')
+									])),
+							A2(
+								$elm$html$Html$input,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('line-content')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('')
+									]))
+						]));
 				var $elm$html$Html$br = _VirtualDom_node('br');
 				var $elm$core$List$intersperse = F2(
 					function (sep, xs) {
@@ -4929,9 +4967,6 @@
 						}
 					});
 				var $elm$core$String$lines = _String_lines;
-				var $elm$html$Html$span = _VirtualDom_node('span');
-				var $elm$virtual_dom$VirtualDom$text = _VirtualDom_text;
-				var $elm$html$Html$text = $elm$virtual_dom$VirtualDom$text;
 				var $author$project$Intro$formatText = function (value) {
 					return A2(
 						$elm$html$Html$span,
@@ -4967,7 +5002,7 @@
 									]),
 								_List_fromArray(
 									[
-										$elm$html$Html$text('Github ')
+										$elm$html$Html$text('Github')
 									])),
 							A2(
 								$elm$html$Html$a,
@@ -4998,7 +5033,8 @@
 												$author$project$Intro$formatText($author$project$Intro$intro)
 											])),
 									$author$project$Intro$usefulLinksView
-								]))
+								])),
+						$author$project$Intro$endScriptView
 					]);
 				var $author$project$Intro$partialContentView = function (length) {
 					return _List_fromArray(
@@ -5030,6 +5066,35 @@
 						return $author$project$Intro$finishedContentView;
 					}
 				};
+				var $author$project$Intro$startScriptView = A2(
+					$elm$html$Html$div,
+					_List_fromArray(
+						[
+							$elm$html$Html$Attributes$class('terminal-line')
+						]),
+					_List_fromArray(
+						[
+							A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('line-head')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('>')
+									])),
+							A2(
+								$elm$html$Html$span,
+								_List_fromArray(
+									[
+										$elm$html$Html$Attributes$class('line-content')
+									]),
+								_List_fromArray(
+									[
+										$elm$html$Html$text('./intro.sh')
+									]))
+						]));
 				var $author$project$Intro$terminalBody = function (model) {
 					return A2(
 						$elm$html$Html$div,
@@ -5037,7 +5102,10 @@
 							[
 								$elm$html$Html$Attributes$class('terminal-body')
 							]),
-						$author$project$Intro$contentView(model));
+						A2(
+							$elm$core$List$cons,
+							$author$project$Intro$startScriptView,
+							$author$project$Intro$contentView(model)));
 				};
 				var $elm$html$Html$button = _VirtualDom_node('button');
 				var $author$project$WindowHeader$windowHeader = function (title) {

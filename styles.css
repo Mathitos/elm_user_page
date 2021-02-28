@@ -86,15 +86,23 @@ body{
   padding: 0 5px;
 }
 
+.terminal-line > input {
+  border: none;
+  background: none;
+  outline: none;
+  margin-left: 10px;
+  color: #fff
+}
+
 .program-line > span {
   color: #00de33;
   font-weight: bold;
 }
 .program-line__links{
-  margin: 15px 0 0 15px;
+  margin: 15px 0 15px 15px;
 }
 .program-line__links > a {
-  color: #00de33;
+  color: #016619;
   font-weight: bold;
   text-decoration: none;
 }

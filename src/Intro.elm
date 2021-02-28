@@ -64,11 +64,14 @@ update msg _ =
 
 writeMore : Int -> Cmd Msg
 writeMore currentLength =
-    if introLength > currentLength then
-        Process.sleep 10 |> Task.perform (\_ -> Writing (currentLength + 1))
+    if introLength <= currentLength then
+        Process.sleep 1 |> Task.perform (\_ -> Done)
+
+    else if currentLength < 31 || currentLength > 38 then
+        Process.sleep 30 |> Task.perform (\_ -> Writing (currentLength + 1))
 
     else
-        Process.sleep 1 |> Task.perform (\_ -> Done)
+        Process.sleep 500 |> Task.perform (\_ -> Writing (currentLength + 1))
 
 
 
@@ -87,7 +90,12 @@ terminalBody : Model -> Html Msg
 terminalBody model =
     div
         [ class "terminal-body" ]
-        (contentView model)
+        (startScriptView :: contentView model)
+
+
+startScriptView : Html Msg
+startScriptView =
+    div [ class "terminal-line" ] [ span [ class "line-head" ] [ text ">" ], span [ class "line-content" ] [ text "./intro.sh" ] ]
 
 
 contentView : Model -> List (Html Msg)
@@ -113,6 +121,7 @@ finishedContentView =
         [ span [] [ formatText intro ]
         , usefulLinksView
         ]
+    , endScriptView
     ]
 
 
@@ -129,7 +138,12 @@ usefulLinksView : Html Msg
 usefulLinksView =
     div [ class "program-line__links" ]
         [ a [ href "https://github.com/Mathitos" ]
-            [ text "Github " ]
+            [ text "Github" ]
         , a [ href "https://www.linkedin.com/in/matheusanzzulin/" ]
             [ text "LinkedIn " ]
         ]
+
+
+endScriptView : Html Msg
+endScriptView =
+    div [ class "terminal-line" ] [ span [ class "line-head" ] [ text ">" ], input [ class "line-content" ] [ text "" ] ]
