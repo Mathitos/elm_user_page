@@ -16,3 +16,6 @@ repl-temp-*
 *.code-workspace
 
 # End of https://www.toptal.com/developers/gitignore/api/vscode,elm
+dist/main.js
+main.js
+node_modules/*

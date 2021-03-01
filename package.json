@@ -1,5 +1,9 @@
 {
   "devDependencies": {
-    "elm": "^0.19.1-5"
+    "elm": "^0.19.1-5",
+    "elm-live": "^4.0.2"
+  },
+  "scripts": {
+    "start": "elm-live src/Main.elm --open -- --output=main.js"
   }
 }
